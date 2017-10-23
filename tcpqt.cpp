@@ -219,7 +219,6 @@ void tcpQt::on_pushButton_6_clicked()
 //      SEND SETTİNG
 void tcpQt::sQProcess()
 {
-
     QProcess *process = new QProcess(this);
     QString program = "/bin/sh";
     QString labelname = ui->label_5->text();
@@ -239,7 +238,6 @@ void tcpQt::sQProcess()
 
     }
 }
-
 void tcpQt::on_createconfig_triggered(){
-f.show();
+    f.show();
 }
