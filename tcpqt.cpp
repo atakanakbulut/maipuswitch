@@ -29,9 +29,7 @@ tcpQt::tcpQt(QWidget *parent) :
     ui(new Ui::tcpQt)
 {
     ui->setupUi(this);
-
-    ui->toolButton->setStyleSheet(gray);
-    //ui->toolButton_2->setStyleSheet(gray);
+       ui->toolButton->setStyleSheet(gray);
     ui->toolButton_commonPoe->setStyleSheet(gray);
 
 
@@ -46,23 +44,19 @@ tcpQt::tcpQt(QWidget *parent) :
     filemodel->setRootPath(sPatch);
     ui->listView_2->setModel(filemodel);
     connect(ui->pushButton, SIGNAL(clicked()),this, SLOT(sQProcess()));
-    //sockets->is
-
 
 }
-
-
-
 void tcpQt::sConnect()
 {
     sockets = new QTcpSocket(this);
     connect(ui->pushbutton2,SIGNAL(pressed()),this,SLOT(sUsernamePw()));
     connect(sockets, SIGNAL(disconnected()),this,SLOT(sDisconnect()));
     connect(sockets, SIGNAL(connected()),this,SLOT(sconnected()));
-    connect(sockets, SIGNAL(bytesWritten(qint64)),this,SLOT(sReadyforRead(qint64)));
+    //connect(sockets, SIGNAL(bytesWritten(qint64)),this,SLOT(sReadyforRead(qint64)));
+    connect(sockets, SIGNAL(readyRead()),this, SLOT(sReadyRead()));
     connect(ui->pbSend , SIGNAL(clicked(bool)),this, SLOT(onSendClicked()));
     connect(ui->leCmds, SIGNAL(returnPressed()),this, SLOT(onSendClicked()));
-    connect(ui->pbSend, SIGNAL(clicked(bool)),this, SLOT(sReadyRead()));
+
 }
 // standard connection
 
@@ -74,9 +68,7 @@ void tcpQt::sUsernamePw(){
 
     qDebug() << "connecting";
     QString hst = ui->hostadr->text();
-    // QString port = ui->portno->text();
     sockets->connectToHost(QHostAddress(hst),23);
-    //sockets->isc
 
     if(!sockets->waitForConnected(5000)){
         qDebug() << "Error" << sockets->errorString();
@@ -84,17 +76,15 @@ void tcpQt::sUsernamePw(){
     }
     else
     {
-        ui->label->setStyleSheet(red);
+        ui->label->setStyleSheet(green);
     }
 
 }
 
 void tcpQt::sconnected(){
     qDebug() << "connected...";
-    // ui->label->setText("connected");
     ui->toolButton->setStyleSheet(green);
-    //  sockets->write("HEAD / HTTP/1.0\r\n\r\n\r\n\r\n");
-    sockets->write("dsasdsa");
+
 }
 
 void tcpQt::sDisconnect(){
@@ -104,8 +94,8 @@ void tcpQt::sDisconnect(){
 
 void tcpQt::sByteR(){
 
-    qDebug() << "reading...";
-    qDebug() << sockets->readAll();
+   // qDebug() << "reading...";
+    //qDebug() << sockets->readAll();
 }
 
 void tcpQt::aOutput(){
@@ -118,13 +108,11 @@ void tcpQt::aOutput(){
 void tcpQt::onSendClicked()
 {
     if(ui->leCmds->text().length() == 0) return;
-
-    // // ui->leCmds->text().toStdString().c_str();
     ui->leCmds->text().length();
-    //    QString tes =  ui->leCmds->text().toStdString().c_str();
-    QString tes = ui->leCmds->text();
-    sockets->write("");
-    qDebug() << tes << "written";
+
+    QString tes = ui->leCmds->text()+"\n";
+    sockets->write(tes.toLatin1());
+   // qDebug() << tes << "written";
 
     ui->leCmds->clear();
 }
@@ -138,13 +126,14 @@ void tcpQt::sReadyforRead(qint64 bytes){
 void tcpQt::sGetData(){
 }
 void tcpQt::sReadyRead(){
-    qDebug() << "reading ...";
-    //  qDebug() << sockets->readAll();
+ //   qDebug() << "reading ...";
     QString aa = sockets->readAll();
-    qDebug() << aa;
-    ui->lineEdit->setText(aa);
-
-    //ui->listWidget = sockets->readAll();
+    ui->textBrowser->setText(aa);
+    //QString aa = sockets->readAll();
+    ui->textBrowser->setText(aa);
+ //   qDebug() << aa;
+    //ui->lineEdit->setText(aa);
+   // ui->textBrowser->setText(aa);
 }
 
 tcpQt::~tcpQt()
@@ -155,7 +144,6 @@ void tcpQt::on_pushButton_2_clicked()
 {
     connect(ui->pushButton_2, SIGNAL(clicked()),this,SLOT(close()));
 }
-
 
 void tcpQt::on_listView_clicked(const QModelIndex &index)
 {

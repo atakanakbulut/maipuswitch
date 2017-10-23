@@ -20,23 +20,13 @@ signals:
 
 public slots:
 
-
-
 private slots:
-  //  bool save();
-  //  bool saveFile(const QString &);
-   // bool saveAs();
-
-
-
 
 void on_pushButton_2_clicked();
 
 private:
     Ui::createConfig *ui;
     QString mfileName;
-  //  bool okToContinue();
-
 };
 
 

@@ -32,9 +32,6 @@ void createConfig::on_pushButton_2_clicked()
     QString d6 =ui->lineEdit_6->text(); //mask
     QString d7 =ui->lineEdit_7->text(); //start
     QString d8 =ui->lineEdit_8->text(); //last
-    //QString ret = d1,d2,d3,d4;
-    //ui->textEdit->setText(d1,d2);
-
 
     QFile file("/home/atakan/Desktop/setuperderes.sh");
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -60,7 +57,6 @@ void createConfig::on_pushButton_2_clicked()
             qDebug() <<"poe off";
             for(int counters=1; counters <= 8; counters++){
                 out<<"interface gigabitethernet "<<counters<<"\nno poe enable\nexit\n";
-
             }
 
         }
@@ -68,8 +64,8 @@ void createConfig::on_pushButton_2_clicked()
             qDebug() <<"poe on";
             out<<"poe reset\n";
         }
-        // THİS PART ADJUST TRUNK AND ACCES PORT
 
+        // THİS PART ADJUST TRUNK AND ACCES PORT
         if(ui->checkBox->isChecked())
         { out<<"switchport gigabitethernet 1\nswitchport mode trunk\nswitchport trunk allowed vlan add "<<d1<<"\nexit\n";} // port 1
         else{out<<"interface gigabitethernet 1\nswitchport mode access\nswitchport access vlan "<<d1<<"\nexit\n";}

@@ -39,12 +39,10 @@ public slots:
     void sByteR();
     void sReadyforRead(qint64 bytes);
     void sGetData();
-  //  void sSentData();
     void sReadyRead();
     void sUsernamePw();
     void sQProcess();
-  //  void sResetFunctions();
-     void on_pushButton_6_clicked();
+    void on_pushButton_6_clicked();
 signals:
 
 private:
@@ -57,22 +55,13 @@ private:
 
 private slots:
 
-  //  void on_leHost_cursorPositionChanged(int arg1, int arg2);
-    //void onConsoleChanged();
     void onSendClicked();
-    //void on_pbSend_clicked();
     void on_pushButton_2_clicked();
     void ssConsole();
-   // void on_actionOpen_triggered();
     void on_listView_clicked(const QModelIndex &index);
-
-
     void on_pushButton_3_clicked();
-    //void on_toolButton_CloseP_clicked();
     void on_pushButton_4_clicked();
     void on_pushButton_5_clicked();
-
-   // void on_pushButton_clicked();
     void on_createconfig_triggered();
 };
 
