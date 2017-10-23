@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo ".....Maipu Helper...."
+echo "Yapmak istediginiz islemi yaziniz"
+echo "ayar    - Maipu icin ayar dosyasi olusturur"
+echo "yukleme - Olusturulmus olan ayar icin Maipuya yukleme yapar"
+
+read answer
+
+case "$answer" in
+     
+	 ayar) "./creator";;
+
+	 yukleme) "./setup";;
+
+
+esac
+

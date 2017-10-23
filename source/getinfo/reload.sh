@@ -1,0 +1,17 @@
+#!/bin/bash
+enable
+configure
+reload
+y
+y
+y
+y
+y
+y
+y
+y
+y
+y
+y
+y
+y

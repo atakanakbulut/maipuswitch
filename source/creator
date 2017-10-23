@@ -1,0 +1,99 @@
+#!/bin/bash
+
+
+setup()
+{
+echo "#!/bin/bash" > ./source/maipuvlan$vl
+echo enable >> ./source/maipuvlan$vl
+echo configure >> ./source/maipuvlan$vl
+echo vlan 1 >> ./source/maipuvlan$vl
+echo exit >> ./source/maipuvlan$vl
+echo vlan $vl >> ./source/maipuvlan$vl
+echo exit >> ./source/maipuvlan$vl
+echo interface vlan $vl >> ./source/maipuvlan$vl
+echo ip address $ip_adr $msk gateway $gwy >> ./source/maipuvlan$vl                      
+echo exit >> ./source/maipuvlan$vl
+echo ip dhcp pool 1 >> ./source/maipuvlan$vl
+echo network $ip_adr $dhcp_msk $dhcp_basl $dhcp_bts >> ./source/maipuvlan$vl                    
+echo lease 0 1 0 >> ./source/maipuvlan$vl
+echo exit >> ./source/maipuvlan$vl
+echo ip dhcp-server >> ./source/maipuvlan$vl
+echo interface gigabitethernet 1 >> ./source/maipuvlan$vl
+echo switchport mode trunk >> ./source/maipuvlan$vl
+echo switchport trunk allowed vlan add $vl >> ./source/maipuvlan$vl
+echo exit >> ./source/maipuvlan$vl
+echo interface gigabitethernet 8 >> ./source/maipuvlan$vl
+echo switchport mode trunk >> ./source/maipuvlan$vl
+echo switchport trunk allowed vlan add $vl >> ./source/maipuvlan$vl
+echo exit >> ./source/maipuvlan$vl
+echo interface gigabitethernet 2 >> ./source/maipuvlan$vl
+echo switchport mode access >> ./source/maipuvlan$vl
+echo switchport access vlan $vl >> ./source/maipuvlan$vl
+echo exit >> ./source/maipuvlan$vl
+echo interface gigabitethernet 3 >> ./source/maipuvlan$vl
+echo switchport mode access >> ./source/maipuvlan$vl
+echo switchport access vlan $vl >> ./source/maipuvlan$vl
+echo exit >> ./source/maipuvlan$vl
+echo interface gigabitethernet 4 >> ./source/maipuvlan$vl
+echo switchport mode access >> ./source/maipuvlan$vl
+echo switchport access vlan $vl >> ./source/maipuvlan$vl
+echo exit >> ./source/maipuvlan$vl
+echo interface gigabitethernet 5 >> ./source/maipuvlan$vl
+echo switchport mode access >> ./source/maipuvlan$vl
+echo switchport access vlan $vl >> ./source/maipuvlan$vl
+echo exit >> ./source/maipuvlan$vl
+echo interface gigabitethernet 6 >> ./source/maipuvlan$vl
+echo switchport mode access >> ./source/maipuvlan$vl
+echo switchport access vlan $vl >> ./source/maipuvlan$vl
+echo exit >> ./source/maipuvlan$vl
+echo interface gigabitethernet 7 >> ./source/maipuvlan$vl
+echo switchport mode access >> ./source/maipuvlan$vl
+echo switchport access vlan $vl >> ./source/maipuvlan$vl
+echo exit >> ./source/maipuvlan$vl
+echo write >> ./source/maipuvlan$vl
+
+chmod +x ./source/maipuvlan$vl
+echo "vlan$vl olusturuldu ..."
+
+
+# vl=$(($vl+1))	
+
+}
+
+loop1() {
+
+for ((i = 1 ; i < 50; i++ ));do
+
+
+echo "istenilen verileri giriniz"
+echo "    VLAN no     :            "
+read vl
+echo "    İP Adresi   :            "
+read ip_adr
+echo "    MASK Adresi :            "
+read msk
+echo "    GATEWAY Adresi           " 
+read gwy
+echo "    DHCP Ayarlarini giriniz: "
+echo "    DHCP MASK Adresi       :       "
+read dhcp_msk 
+echo "    DHCP Baslangic ve Bitis adreslerini giriniz :"
+echo "baslangic: "
+read dhcp_basl
+echo "bitis : "
+read dhcp_bts
+setup
+done
+}
+
+
+
+
+echo ".......... BİLKON Maipu IP Ayarlama programi.........."
+echo "......................................................."
+echo -e "\n\n"
+mkdir source
+loop1
+
+
+# cp maipuvlan$vl >

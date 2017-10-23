@@ -1,0 +1,79 @@
+#ifndef TCPQT_H
+#define TCPQT_H
+
+#include <QMainWindow>
+#include <QObject>
+#include <QTcpSocket>
+#include <QAbstractSocket>
+#include <QDebug>
+#include <QString>
+#include  <QFileSystemModel>
+#include "createconfig.h"
+namespace Ui {
+class tcpQt;
+}
+
+class tcpQt : public QMainWindow
+{
+    Q_OBJECT
+
+
+public:
+    explicit tcpQt(QWidget *parent = 0);
+    ~tcpQt();
+
+    void sConnect();
+
+    void aOutput();
+    QString send_text;
+    //tcpQt s;
+    //QProcess *process = new QProcess(this);
+
+signals:
+
+public slots:
+
+    void toConnect();
+    void sconnected();
+    void sDisconnect();
+    void sByteR();
+    void sReadyforRead(qint64 bytes);
+    void sGetData();
+  //  void sSentData();
+    void sReadyRead();
+    void sUsernamePw();
+    void sQProcess();
+  //  void sResetFunctions();
+     void on_pushButton_6_clicked();
+signals:
+
+private:
+    Ui::tcpQt *ui;
+    QTcpSocket *sockets;
+    tcpQt *tracker;
+    QFileSystemModel *dirmodel;
+    QFileSystemModel *filemodel;
+    createConfig f;
+
+private slots:
+
+  //  void on_leHost_cursorPositionChanged(int arg1, int arg2);
+    //void onConsoleChanged();
+    void onSendClicked();
+    //void on_pbSend_clicked();
+    void on_pushButton_2_clicked();
+    void ssConsole();
+   // void on_actionOpen_triggered();
+    void on_listView_clicked(const QModelIndex &index);
+
+
+    void on_pushButton_3_clicked();
+    //void on_toolButton_CloseP_clicked();
+    void on_pushButton_4_clicked();
+    void on_pushButton_5_clicked();
+
+   // void on_pushButton_clicked();
+    void on_createconfig_triggered();
+};
+
+#endif // TCPQT_H

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Maipu switch ip giriniz"
+read ip_adr
+ssh admin@$ip_adr 'bash -s' < ./getinfo/info
+exit
+exit

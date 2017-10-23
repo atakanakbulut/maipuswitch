@@ -1,0 +1,15 @@
+#!/bin/bash
+enable
+show ip interface  brief
+show ip dhcp server
+show interface gigabitethernet 1
+show interface gigabitethernet 2
+show interface gigabitethernet 3
+show interface gigabitethernet 4
+show interface gigabitethernet 5
+show interface gigabitethernet 6
+show interface gigabitethernet 7
+show interface gigabitethernet 8
+exit
+exit
+exit
